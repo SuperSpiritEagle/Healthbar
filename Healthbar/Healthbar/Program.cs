@@ -24,15 +24,24 @@ namespace Healthbar
             DrawBar(number, symbol, LengthBar);
         }
 
-        private static void DrawBar(double value, string symbol, int lengthBar)
+        private static void DrawBar(double percent, string symbol, int lengthBar)
         {
-            var percentageСharacters = (lengthBar * (value / 100));
+            const int Divider = 100;
+
+            int minNumber = 0;
+            int maxNumber = 100;
+
+            var percentageСharacters = (lengthBar * (percent / Divider));
 
             string bar = "";
 
-            if (value >= 0 && value <= 100)
+            if (percent >= minNumber && percent <= maxNumber)
             {
-                Console.Write("[");
+                char openingBracket = '[';
+                char closingBracket = ']';
+                char underlining = '_';
+
+                Console.Write(openingBracket);
 
                 for (int i = 0; i < percentageСharacters; i++)
                 {
@@ -41,10 +50,10 @@ namespace Healthbar
 
                 for (int i = 0; i < (lengthBar - percentageСharacters); i++)
                 {
-                    bar += "_";
+                    bar += underlining;
                 }
 
-                Console.Write($"{bar}]\n");
+                Console.Write($"{bar}{closingBracket}\n");
             }
             else
             {
